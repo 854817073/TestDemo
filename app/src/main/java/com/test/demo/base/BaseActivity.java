@@ -12,9 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
+import com.test.demo.tool.JumpUtils;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * @author This Man
@@ -26,6 +29,7 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     public Context context;
     public Activity mActivity;
     public T binding;
+    @org.jetbrains.annotations.Nullable
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,16 +67,10 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     protected void launchActivity(Class<? extends Activity> activity) {
         startActivity(new Intent(mActivity, activity));
     }
-
-    protected void launchActivityForResult(Class<? extends Activity> activity, int requestCode) {
-        startActivityForResult(new Intent(mActivity, activity), requestCode);
+    protected void launchActivity(Class<? extends Activity> activity, Map<String, Object> map) {
+        if (map == null) return;
+        JumpUtils.INSTANCE.runActivity(mActivity, activity, map);
     }
-
-    protected void launchActivity(Class<? extends Activity> activity, Activity finishCurrentActivity) {
-        startActivity(new Intent(mActivity, activity));
-        finishCurrentActivity.finish();
-    }
-
     public void onBackKeyPressed() {
         finish();
     }
