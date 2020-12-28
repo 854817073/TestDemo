@@ -1,4 +1,4 @@
-package com.test.demo.widget
+package com.test.demo.ui.adapter
 
 import android.content.Context
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.test.demo.R
+import com.test.demo.widget.SimpleViewHolder
 
 /**
  * @author This Man
@@ -21,7 +22,11 @@ class BaseRecyclerAdapter<T>(
     private var mResource: Int
 ) : RecyclerView.Adapter<SimpleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder {
-        return SimpleViewHolder.createViewHolder(mContext, parent, mResource)
+        return SimpleViewHolder.createViewHolder(
+            mContext,
+            parent,
+            mResource
+        )
     }
 
     override fun getItemCount(): Int {

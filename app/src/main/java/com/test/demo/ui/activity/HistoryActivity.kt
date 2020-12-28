@@ -8,7 +8,7 @@ import com.test.demo.base.BaseActivity
 import com.test.demo.bean.TestBean
 import com.test.demo.bean.TestBeanList
 import com.test.demo.databinding.ActivityHistoryBinding
-import com.test.demo.widget.BaseRecyclerAdapter
+import com.test.demo.ui.adapter.BaseRecyclerAdapter
 import com.test.demo.widget.SimpleViewHolder
 
 /**
@@ -29,7 +29,11 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>() {
         if (list != null) {
             if (list.isNotEmpty()) {
                 mDataHistory = Gson().fromJson(list, TestBeanList::class.java)
-                val adapter = BaseRecyclerAdapter(this, mDataHistory.list, R.layout.adapter_item)
+                val adapter = BaseRecyclerAdapter(
+                    this,
+                    mDataHistory.list,
+                    R.layout.adapter_item
+                )
                 adapter.inter = object : BaseRecyclerAdapter.Convert<TestBean> {
                     override fun convert(holder: SimpleViewHolder, data: TestBean, position: Int) {
                         var textTime: TextView = holder.getView(R.id.tv_time)

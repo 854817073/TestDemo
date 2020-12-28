@@ -3,7 +3,6 @@ package com.test.demo.ui.activity
 import android.content.SharedPreferences
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
@@ -13,7 +12,7 @@ import com.test.demo.bean.TestBean
 import com.test.demo.bean.TestBeanList
 import com.test.demo.databinding.ActivityMainBinding
 import com.test.demo.http.HttpService
-import com.test.demo.widget.BaseRecyclerAdapter
+import com.test.demo.ui.adapter.BaseRecyclerAdapter
 import com.test.demo.widget.SimpleViewHolder
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -32,7 +31,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val time: Long = 5000
     private val mData = mutableListOf<TestBean>()
     private var mDataHistory = TestBeanList()
-    private val adapter = BaseRecyclerAdapter(this, mData, R.layout.adapter_item)
+    private val adapter = BaseRecyclerAdapter(
+        this,
+        mData,
+        R.layout.adapter_item
+    )
     private lateinit var settings: SharedPreferences
     private val fileName = "file"
     private val lastDataName = "last"
